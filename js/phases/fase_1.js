@@ -33,6 +33,7 @@ const Fase1 = (() => {
       name:  'Nóvaris',
       tema:  'Introspección',
       color: '#1a3a6e',
+      imagen: 'assets/img/novaris.png',
       story: `
         <p>Eones atrás, existió Nóvaris. Una civilización que había elevado el progreso a la categoría de lo sagrado. Sus ciudades crecían hacia las estrellas con una velocidad que desafiaba la razón, y sus habitantes medían el valor de su existencia en logros, en conquistas, en la distancia recorrida desde el punto de partida.</p>
         <p>Dos figuras guiaban su destino: Aethon, el Arquitecto del Instante, cuya filosofía proclamaba que solo existía el ahora y que detenerse era sinónimo de morir. Y Varek la Perpetua, guardiana de los grandes proyectos, que tejía planes tan vastos que ningún ojo podía ver su totalidad. Juntos construyeron maravillas que rozaban el firmamento. Nadie preguntó si debían hacerlo. Solo si podían.</p>
@@ -46,6 +47,7 @@ const Fase1 = (() => {
       name:  'Selenar',
       tema:  'Reflexión',
       color: '#8090a8',
+      imagen: 'assets/img/selenar.png',
       story: `
         <p>Antes de que existieran las preguntas, existía Selenar.</p>
         <p>Un mundo casi enteramente de agua, donde la tierra emergió no como continentes sino como islas de piedra oscura, perfectas en su modestia. Sobre ellas, los Tejedores de Selenar construyeron sus templos, no para adorar a ningún dios, sino para practicar el único arte que consideraban sagrado: el de sentarse con uno mismo.</p>
@@ -59,6 +61,7 @@ const Fase1 = (() => {
       name:  'Krath',
       tema:  'Caos',
       color: '#8a3a10',
+      imagen: 'assets/img/krath.png',
       story: `
         <p>Nadie recuerda cómo era Krath antes del Gran Quiebre.</p>
         <p>Los registros más antiguos hablan de un mundo completo, de océanos que conectaban continentes y cielos que no tenían bordes visibles. Pero eso fue antes del cataclismo que nadie predijo: la noche en que el núcleo del planeta exhaló su último aliento y Krath se partió en mil fragmentos que quedaron suspendidos en su propia órbita, como los pedazos de un espejo roto flotando en el vacío.</p>
@@ -72,6 +75,7 @@ const Fase1 = (() => {
       name:  'Áureum',
       tema:  'Orden',
       color: '#c8980a',
+      imagen: 'assets/img/aureum.png',
       story: `
         <p>Dicen que los viajeros que ven Áureum por primera vez desde el espacio confunden sus ciudades con estrellas.</p>
         <p>No es metáfora. Sus torres de oro y plata pulido reflejan la luz de su sol con tanta precisión que el planeta entero parece arder sin consumirse. Áureum no tiene guerras. No tiene crimen. No tiene hambre. Cada áureo nace con un propósito asignado por Los Arquitectos Divinos.</p>
@@ -86,6 +90,7 @@ const Fase1 = (() => {
       name:  'Sylvara',
       tema:  'Paz',
       color: '#208040',
+      imagen: 'assets/img/sylvara.png',
       story: `
         <p>Sylvara no te impresiona de inmediato.</p>
         <p>No tiene torres que rocen las estrellas ni ciudades que ardan como joyas en la oscuridad. Vista desde el espacio es simplemente verde, un verde tan denso y tan vivo que parece respirar, interrumpido apenas por el destello plateado de sus ríos.</p>
@@ -100,6 +105,7 @@ const Fase1 = (() => {
       name:  'Aeryn',
       tema:  'Liberación',
       color: '#3890b8',
+      imagen: 'assets/img/aeryn.png',
       story: `
         <p>Aeryn no tiene suelo.</p>
         <p>Sus islas flotan en capas, algunas tan altas que rozan las nubes, otras tan bajas que casi tocan la niebla perpetua que cubre el vacío debajo. Entre ellas, puentes de cuerda y madera ligera conectan lo que quiere ser conectado y dejan sin conectar lo que prefiere estar solo.</p>
@@ -179,6 +185,7 @@ const Fase1 = (() => {
       <div class="planet-modal-header">
         <div class="planet-modal-dot" style="background:${planet.color}"></div>
         <span class="planet-modal-name">${planet.name} — ${planet.tema}</span>
+        /* <img src="${planet.imagen}" alt="${planet.name}" class="planet-modal-image" /> */
       </div>
       <div class="planet-story modal-reveal">${planet.story}</div>
     `;
