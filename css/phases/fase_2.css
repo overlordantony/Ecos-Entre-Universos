@@ -1,0 +1,392 @@
+/*
+ * fase_2.css
+ * Ecos Entre Universos — Fase 2: Bastión Hueco
+ * Cubo 3D rotante con 8 nodos interactivos
+ */
+
+/* ── Variables de Fase 2 ──────────────────────────────────────────── */
+:root {
+  --f2-accent:      #4a90d9;
+  --f2-accent-dim:  #1a4a7a;
+  --f2-accent-glow: rgba(74, 144, 217, 0.3);
+  --f2-node-size:   clamp(28px, 5vw, 38px);
+  --f2-cube-size:   clamp(180px, 42vw, 300px);
+}
+
+/* ── Contenedor ───────────────────────────────────────────────────── */
+.fase-2 {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 50% 50% at 50% 50%,
+      rgba(74, 144, 217, 0.05) 0%,
+      transparent 70%),
+    var(--color-void);
+}
+
+/* ── Título ───────────────────────────────────────────────────────── */
+.fase-2 .fase-titulo {
+  font-family: var(--font-title);
+  font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  position: absolute;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* ── Escena 3D ────────────────────────────────────────────────────── */
+.cube-scene {
+  perspective: 800px;
+  width: var(--f2-cube-size);
+  height: var(--f2-cube-size);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cubeRotate 18s linear infinite;
+}
+
+@keyframes cubeRotate {
+  0%   { transform: rotateX(20deg) rotateY(0deg); }
+  100% { transform: rotateX(20deg) rotateY(360deg); }
+}
+
+/* ── Aristas del cubo (12 líneas) ─────────────────────────────────── */
+.cube-edges {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.edge {
+  position: absolute;
+  background: rgba(74, 144, 217, 0.18);
+  transform-origin: 0 50%;
+  transition: background 600ms ease, box-shadow 600ms ease;
+}
+
+.edge.lit {
+  background: rgba(74, 144, 217, 0.55);
+  box-shadow: 0 0 8px rgba(74, 144, 217, 0.4);
+}
+
+/* ── Nodos (8 vértices del cubo) ──────────────────────────────────── */
+.cube-node {
+  position: absolute;
+  width: var(--f2-node-size);
+  height: var(--f2-node-size);
+  border-radius: 50%;
+  background: var(--color-deep);
+  border: 1.5px solid rgba(74, 144, 217, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow   var(--transition-fast),
+    background   var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  z-index: 5;
+}
+
+.cube-node:hover {
+  border-color: var(--f2-accent);
+  box-shadow: 0 0 16px var(--f2-accent-glow);
+  background: rgba(74, 144, 217, 0.08);
+}
+
+.cube-node.solved {
+  border-color: var(--f2-accent);
+  background: rgba(74, 144, 217, 0.12);
+  box-shadow:
+    0 0 12px var(--f2-accent-glow),
+    inset 0 0 8px rgba(74, 144, 217, 0.1);
+  animation: nodeSolvedPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes nodeSolvedPulse {
+  0%, 100% { box-shadow: 0 0 12px var(--f2-accent-glow); }
+  50%       { box-shadow: 0 0 22px rgba(74, 144, 217, 0.55); }
+}
+
+.cube-node .node-glyph {
+  font-family: var(--font-mono);
+  font-size: clamp(0.45rem, 1.2vw, 0.6rem);
+  color: var(--f2-accent);
+  letter-spacing: 0.05em;
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1.1;
+}
+
+/* Posiciones de los 8 vértices usando transform 3D */
+.node-0 { transform: translate3d(0, 0, calc(var(--f2-cube-size) / 2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+.node-1 { transform: translate3d(calc(var(--f2-cube-size)), 0, calc(var(--f2-cube-size) / 2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+.node-2 { transform: translate3d(calc(var(--f2-cube-size)), calc(var(--f2-cube-size)), calc(var(--f2-cube-size) / 2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+.node-3 { transform: translate3d(0, calc(var(--f2-cube-size)), calc(var(--f2-cube-size) / 2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+.node-4 { transform: translate3d(0, 0, calc(var(--f2-cube-size) / -2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+.node-5 { transform: translate3d(calc(var(--f2-cube-size)), 0, calc(var(--f2-cube-size) / -2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+.node-6 { transform: translate3d(calc(var(--f2-cube-size)), calc(var(--f2-cube-size)), calc(var(--f2-cube-size) / -2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+.node-7 { transform: translate3d(0, calc(var(--f2-cube-size)), calc(var(--f2-cube-size) / -2))
+           translateX(calc(var(--f2-node-size) / -2))
+           translateY(calc(var(--f2-node-size) / -2)); }
+
+/* ── Estrella central del cubo ────────────────────────────────────── */
+.cube-star {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  width: clamp(32px, 6vw, 44px);
+  height: clamp(32px, 6vw, 44px);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    #a0c8ff 0%, #4a90d9 40%, #1a3060 100%);
+  box-shadow:
+    0 0 16px 6px  rgba(74, 144, 217, 0.45),
+    0 0 40px 16px rgba(74, 144, 217, 0.2);
+  cursor: pointer;
+  z-index: 20;
+  animation: starCorePulse 3s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes starCorePulse {
+  0%, 100% { box-shadow: 0 0 16px 6px rgba(74,144,217,0.45), 0 0 40px 16px rgba(74,144,217,0.2); }
+  50%       { box-shadow: 0 0 24px 10px rgba(74,144,217,0.6), 0 0 55px 22px rgba(74,144,217,0.3); }
+}
+
+/* ── Contador de nodos resueltos ──────────────────────────────────── */
+.nodes-counter {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  z-index: 10;
+}
+
+/* ── Contenido de modales de nodo ─────────────────────────────────── */
+.node-modal-header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.node-modal-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--f2-accent);
+  text-transform: uppercase;
+}
+
+.node-modal-title {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text);
+  margin-top: 4px;
+}
+
+.node-modal-theme {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* Bloque de código del puzzle */
+.puzzle-code-block {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(74, 144, 217, 0.2);
+  border-radius: 6px;
+  padding: var(--space-sm) var(--space-md);
+  margin: var(--space-md) 0;
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 2vw, 0.88rem);
+  color: #00e896;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.puzzle-question {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text-dim);
+  text-align: center;
+  margin-bottom: var(--space-sm);
+}
+
+/* Opciones múltiples */
+.puzzle-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0;
+}
+
+.puzzle-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--modal-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.puzzle-option:hover {
+  background: rgba(74, 144, 217, 0.08);
+  border-color: rgba(74, 144, 217, 0.4);
+}
+
+.puzzle-option.selected {
+  background: rgba(74, 144, 217, 0.12);
+  border-color: var(--f2-accent);
+}
+
+.puzzle-option.wrong {
+  border-color: #c0446a;
+  animation: shake 300ms ease;
+}
+
+.option-letter {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--f2-accent);
+  width: 1.4em;
+  flex-shrink: 0;
+}
+
+.option-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+}
+
+/* Remate filosófico */
+.node-remate {
+  border-left: 2px solid rgba(74, 144, 217, 0.3);
+  padding-left: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.node-remate p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text-dim);
+  line-height: 1.85;
+  margin-bottom: 0.4em;
+}
+
+/* Máscaras — Nodo Constante extendido */
+.masks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+}
+
+.mask-item {
+  border: 1px solid var(--modal-border);
+  border-radius: 8px;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.mask-item:hover {
+  background: rgba(74, 144, 217, 0.06);
+  border-color: rgba(74, 144, 217, 0.3);
+}
+
+.mask-name {
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--f2-accent);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.mask-category {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.mask-text {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--color-text-dim);
+  line-height: 1.7;
+}
+
+.mask-actions {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+.mask-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border: 1px solid var(--modal-border);
+  border-radius: 3px;
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+}
+
+.mask-btn:hover              { border-color: var(--f2-accent); color: var(--f2-accent); }
+.mask-btn.active-ponerse     { border-color: #60c080; color: #60c080; background: rgba(96,192,128,0.08); }
+.mask-btn.active-guardar     { border-color: #e8a020; color: #e8a020; background: rgba(232,160,32,0.08); }
+.mask-btn.active-soltar      { border-color: #c0446a; color: #c0446a; background: rgba(192,68,106,0.08); }

@@ -1,0 +1,80 @@
+<!--
+  fase_final.html
+  Ecos Entre Universos — Fase Final: Un Nuevo Universo
+  El Final y el Comienzo
+-->
+
+<link rel="stylesheet" href="css/phases/fase_final.css" />
+
+<section class="fase-final">
+
+  <span class="fase-titulo">Un Nuevo Universo</span>
+
+  <!-- Nebulosa de fondo -->
+  <div class="nebula-bg" aria-hidden="true"></div>
+
+  <!-- Galaxia -->
+  <div class="galaxy-container">
+
+    <!-- Brazos de la galaxia -->
+    <div class="galaxy-arms" aria-hidden="true"></div>
+
+    <!-- Agujero negro central — ahora es origen, no destrucción -->
+    <div
+      class="galaxy-core"
+      id="galaxy-core"
+      role="button"
+      aria-label="El núcleo de la nueva galaxia"
+      onclick="FaseFinal.onCoreClick(event)"
+    ></div>
+
+    <!-- Órbita 1 — Estrella Origen (más lejana, azul pálido) -->
+    <div class="star-orbit star-orbit-1">
+      <div class="galaxy-star-wrapper">
+        <div
+          class="galaxy-star star-origen"
+          id="star-origen"
+          role="button"
+          aria-label="Estrella Origen"
+          onclick="FaseFinal.onStarClick('origen')"
+        ></div>
+        <span class="star-label">Origen</span>
+      </div>
+    </div>
+
+    <!-- Órbita 2 — Estrella Presente (blanco cálido) -->
+    <div class="star-orbit star-orbit-2">
+      <div class="galaxy-star-wrapper">
+        <div
+          class="galaxy-star star-presente"
+          id="star-presente"
+          role="button"
+          aria-label="Estrella Presente"
+          onclick="FaseFinal.onStarClick('presente')"
+        ></div>
+        <span class="star-label">Presente</span>
+      </div>
+    </div>
+
+    <!-- Órbita 3 — Estrella Pacto (dorada, más cercana) -->
+    <div class="star-orbit star-orbit-3">
+      <div class="galaxy-star-wrapper">
+        <div
+          class="galaxy-star star-pacto"
+          id="star-pacto"
+          role="button"
+          aria-label="Estrella Pacto"
+          onclick="FaseFinal.onStarClick('pacto')"
+        ></div>
+        <span class="star-label">Pacto</span>
+      </div>
+    </div>
+
+  </div><!-- /galaxy-container -->
+
+  <!-- Mensaje final cuando todo está leído -->
+  <p class="galaxy-final-hint" id="galaxy-final-hint">
+    el universo espera tu respuesta
+  </p>
+
+</section>

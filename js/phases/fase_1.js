@@ -20,7 +20,7 @@ const Fase1 = (() => {
   let   puzzleUnlocked = false;
 
   // Contraseña del puzzle: cc(Naoiy, -6) === 'hueco'
-  const PUZZLE_ENCODED = 'Naoiy';
+  const PUZZLE_ENCODED = 'Nakiu';
   const PUZZLE_SHIFT   = 6;
 
   // Orden correcto del puzzle

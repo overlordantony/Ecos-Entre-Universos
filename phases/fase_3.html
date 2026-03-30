@@ -1,0 +1,31 @@
+<!--
+  fase_3.html
+  Ecos Entre Universos — Fase 3: Buscando el Vacío
+  El Corazón del Vacío
+-->
+
+<link rel="stylesheet" href="css/phases/fase_3.css" />
+
+<section class="fase-3">
+
+  <span class="fase-titulo">Buscando el Vacío</span>
+
+  <!-- Campo de ruinas en el fondo -->
+  <div class="ruins-field" id="ruins-field" aria-hidden="true"></div>
+
+  <!-- Agujero Negro -->
+  <div class="black-hole-container">
+    <div class="accretion-disk" aria-hidden="true"></div>
+    <div class="gravity-halo"   aria-hidden="true"></div>
+    <div
+      class="black-hole"
+      id="black-hole"
+      role="button"
+      aria-label="El corazón del vacío — toca para comenzar"
+      onclick="Fase3.onBlackHoleClick(event)"
+    ></div>
+  </div>
+
+  <p class="black-hole-hint">toca el vacío</p>
+
+</section>

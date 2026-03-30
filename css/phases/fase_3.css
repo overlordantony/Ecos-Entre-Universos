@@ -1,0 +1,211 @@
+/*
+ * fase_3.css
+ * Ecos Entre Universos — Fase 3: Buscando el Vacío
+ * Agujero negro consumiendo ruinas de un universo destruido
+ */
+
+:root {
+  --f3-accent:      #9b30ff;
+  --f3-accent-dim:  #5a1a9a;
+  --f3-accent-glow: rgba(155, 48, 255, 0.3);
+  --f3-orange:      rgba(255, 140, 40, 0.25);
+}
+
+/* ── Contenedor ───────────────────────────────────────────────────── */
+.fase-3 {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-void);
+}
+
+/* ── Título ───────────────────────────────────────────────────────── */
+.fase-3 .fase-titulo {
+  font-family: var(--font-title);
+  font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  position: absolute;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* ── Ruinas en el fondo ───────────────────────────────────────────── */
+.ruins-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ruin-fragment {
+  position: absolute;
+  background: rgba(155, 48, 255, 0.08);
+  border: 1px solid rgba(155, 48, 255, 0.12);
+  border-radius: 2px;
+  animation: driftToCenter linear infinite;
+}
+
+@keyframes driftToCenter {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+  100% { transform: translate(var(--drift-x), var(--drift-y)) rotate(var(--drift-r)); opacity: 0; }
+}
+
+/* ── Agujero Negro ────────────────────────────────────────────────── */
+.black-hole-container {
+  position: relative;
+  width: clamp(160px, 40vw, 260px);
+  height: clamp(160px, 40vw, 260px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+/* Disco de acreción exterior */
+.accretion-disk {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 140, 40, 0.15) 15%,
+    rgba(155, 48, 255, 0.2) 30%,
+    transparent 45%,
+    rgba(255, 140, 40, 0.1) 60%,
+    rgba(155, 48, 255, 0.15) 75%,
+    transparent 90%,
+    transparent 100%
+  );
+  animation: diskSpin 8s linear infinite;
+  filter: blur(6px);
+}
+
+@keyframes diskSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Halo gravitacional */
+.gravity-halo {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    transparent 50%,
+    rgba(155, 48, 255, 0.12) 65%,
+    rgba(255, 140, 40, 0.08) 80%,
+    transparent 100%
+  );
+  animation: haloBreath 4s ease-in-out infinite;
+}
+
+@keyframes haloBreath {
+  0%, 100% { transform: scale(1);    opacity: 0.7; }
+  50%       { transform: scale(1.06); opacity: 1; }
+}
+
+/* El agujero negro en sí */
+.black-hole {
+  position: relative;
+  width: 58%;
+  height: 58%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    #000000 0%,
+    #040408 40%,
+    #0a0010 70%,
+    #1a0030 100%
+  );
+  box-shadow:
+    0 0 0 2px rgba(155, 48, 255, 0.3),
+    0 0 30px 10px rgba(155, 48, 255, 0.2),
+    0 0 60px 20px rgba(155, 48, 255, 0.1),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  z-index: 20;
+  transition: box-shadow var(--transition-mid);
+  -webkit-tap-highlight-color: transparent;
+  animation: blackHolePulse 5s ease-in-out infinite;
+}
+
+@keyframes blackHolePulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px rgba(155, 48, 255, 0.3),
+      0 0 30px 10px rgba(155, 48, 255, 0.2),
+      0 0 60px 20px rgba(155, 48, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px rgba(155, 48, 255, 0.5),
+      0 0 45px 15px rgba(155, 48, 255, 0.3),
+      0 0 90px 30px rgba(155, 48, 255, 0.15);
+  }
+}
+
+.black-hole:hover {
+  box-shadow:
+    0 0 0 3px rgba(155, 48, 255, 0.6),
+    0 0 50px 18px rgba(155, 48, 255, 0.4),
+    0 0 100px 35px rgba(155, 48, 255, 0.2);
+}
+
+/* ── Texto de instrucción bajo el agujero negro ───────────────────── */
+.black-hole-hint {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  z-index: 10;
+  animation: hintFade 3s ease-in-out infinite;
+}
+
+@keyframes hintFade {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+/* ── Relato — se revela progresivamente ───────────────────────────── */
+.relato-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.relato-line {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text-dim);
+  line-height: 1.9;
+  text-align: center;
+  opacity: 0;
+  animation: lineReveal 500ms ease forwards;
+}
+
+@keyframes lineReveal {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.relato-line.empty {
+  height: 0.8em;
+}

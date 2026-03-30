@@ -1,0 +1,83 @@
+<!--
+  fase_2.html
+  Ecos Entre Universos — Fase 2: Bastión Hueco
+  El Sistema de la Lógica
+-->
+
+<link rel="stylesheet" href="css/phases/fase_2.css" />
+
+<section class="fase-2">
+
+  <span class="fase-titulo">Bastión Hueco</span>
+
+  <!-- Escena 3D del cubo -->
+  <div class="cube-scene">
+    <div class="cube" id="cube">
+
+      <!-- Estrella central — núcleo del sistema -->
+      <div
+        class="cube-star"
+        id="cube-star"
+        role="button"
+        aria-label="Núcleo del Bastión — instrucciones"
+        onclick="Fase2.onStarClick(event)"
+      ></div>
+
+      <!-- 8 Nodos — vértices del cubo -->
+      <div class="cube-node node-0 solved" id="node-constante"
+        onclick="Fase2.onNodeClick('constante')"
+        role="button" aria-label="Constante — Identidad">
+        <span class="node-glyph">const</span>
+      </div>
+
+      <div class="cube-node node-1" id="node-variable"
+        onclick="Fase2.onNodeClick('variable')"
+        role="button" aria-label="Variable — Decisión">
+        <span class="node-glyph">var</span>
+      </div>
+
+      <div class="cube-node node-2" id="node-condicion"
+        onclick="Fase2.onNodeClick('condicion')"
+        role="button" aria-label="Condición — Miedo">
+        <span class="node-glyph">if</span>
+      </div>
+
+      <div class="cube-node node-3" id="node-funcion"
+        onclick="Fase2.onNodeClick('funcion')"
+        role="button" aria-label="Función — Propósito">
+        <span class="node-glyph">fn()</span>
+      </div>
+
+      <div class="cube-node node-4" id="node-objeto"
+        onclick="Fase2.onNodeClick('objeto')"
+        role="button" aria-label="Objeto — Vínculo">
+        <span class="node-glyph">obj{}</span>
+      </div>
+
+      <div class="cube-node node-5" id="node-modelo"
+        onclick="Fase2.onNodeClick('modelo')"
+        role="button" aria-label="Modelo — Percepción">
+        <span class="node-glyph">~map</span>
+      </div>
+
+      <div class="cube-node node-6" id="node-compuertas"
+        onclick="Fase2.onNodeClick('compuertas')"
+        role="button" aria-label="Compuertas — Moral">
+        <span class="node-glyph">AND</span>
+      </div>
+
+      <div class="cube-node node-7" id="node-ciclo"
+        onclick="Fase2.onNodeClick('ciclo')"
+        role="button" aria-label="Ciclo — Acción">
+        <span class="node-glyph">loop</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Contador de nodos resueltos -->
+  <p class="nodes-counter" id="nodes-counter">
+    0 / 8 nodos resueltos
+  </p>
+
+</section>
