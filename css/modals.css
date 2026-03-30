@@ -1,0 +1,139 @@
+/*
+ * modals.css
+ * Ecos Entre Universos — Estilos de Modales Reutilizables
+ *
+ * Variantes de modal, inputs específicos de fase,
+ * animaciones de entrada y estados de respuesta.
+ */
+
+/* ── Modal de Fase — Input de Contraseña ──────────────────────────── */
+.phase-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+  width: 100%;
+}
+
+.phase-input-group .modal-input {
+  text-align: center;
+  letter-spacing: 0.2em;
+}
+
+.phase-input-group .btn-primary {
+  width: 100%;
+  max-width: 200px;
+}
+
+/* ── Estado de éxito en input ─────────────────────────────────────── */
+.modal-input.success {
+  border-color: #4caf82;
+  box-shadow: 0 0 12px rgba(76, 175, 130, 0.25);
+  animation: inputSuccess 400ms ease forwards;
+}
+
+.modal-input.error {
+  border-color: #c0446a;
+  box-shadow: 0 0 12px rgba(192, 68, 106, 0.25);
+  animation: shake 300ms ease;
+}
+
+@keyframes inputSuccess {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+/* ── Reveal animado — texto que aparece progresivamente ───────────── */
+.modal-reveal {
+  animation: revealText 600ms ease forwards;
+  opacity: 0;
+}
+
+@keyframes revealText {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Separador visual entre secciones del modal ───────────────────── */
+.modal-divider {
+  width: 40%;
+  height: 1px;
+  background: var(--modal-border);
+  margin: var(--space-md) auto;
+}
+
+/* ── Mensaje de error de fase ─────────────────────────────────────── */
+.phase-error {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #c0446a;
+  text-align: center;
+  min-height: 1.4em;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.phase-error.visible {
+  opacity: 1;
+}
+
+/* ── Pista críptica — texto que aparece al completar todos los elem. ─ */
+.hint-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text-dim);
+  line-height: 1.85;
+  text-align: center;
+  padding: 0 var(--space-sm);
+}
+
+/* ── Modal largo — scroll interno ─────────────────────────────────── */
+.modal-box.scrollable {
+  max-height: 82dvh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* ── Overlay de carga entre fases ─────────────────────────────────── */
+.phase-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-void);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+}
+
+.phase-transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.phase-transition-glyph {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--color-accent);
+  letter-spacing: 0.3em;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.97); }
+  50%       { opacity: 1;   transform: scale(1.03); }
+}

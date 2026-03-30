@@ -1,0 +1,430 @@
+/*
+ * fase_1.css
+ * Ecos Entre Universos — Fase 1: Abandono de la Abadía
+ *
+ * Sistema solar interactivo: estrella central + 6 planetas en órbita
+ */
+
+/* ── Variables de Fase 1 ──────────────────────────────────────────── */
+:root {
+  --f1-accent:        #7b2fbe;
+  --f1-accent-dim:    #4a1a7a;
+  --f1-accent-glow:   rgba(123, 47, 190, 0.35);
+  --f1-star-color:    #e8c97a;
+  --f1-star-glow:     rgba(232, 201, 122, 0.4);
+}
+
+/* ── Contenedor de la fase ────────────────────────────────────────── */
+.fase-1 {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%,
+      rgba(123, 47, 190, 0.06) 0%,
+      transparent 70%),
+    var(--color-void);
+}
+
+/* ── Título de fase ───────────────────────────────────────────────── */
+.fase-titulo {
+  font-family: var(--font-title);
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  position: absolute;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* ── Sistema Solar ────────────────────────────────────────────────── */
+.solar-system {
+  position: relative;
+  width: min(80vw, 80vh, 520px);
+  height: min(80vw, 80vh, 520px);
+  flex-shrink: 0;
+}
+
+/* ── Estrella Central ─────────────────────────────────────────────── */
+.star-central {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(52px, 10%, 68px);
+  height: clamp(52px, 10%, 68px);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    #fff8e0 0%,
+    #f5d060 30%,
+    #e8a020 65%,
+    #c06010 100%
+  );
+  box-shadow:
+    0 0 20px 8px  rgba(232, 201, 122, 0.5),
+    0 0 50px 20px rgba(232, 160, 32, 0.25),
+    0 0 90px 40px rgba(192, 96, 16, 0.12);
+  cursor: pointer;
+  z-index: 20;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  animation: starPulse 4s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star-central:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow:
+    0 0 28px 12px  rgba(232, 201, 122, 0.6),
+    0 0 70px 28px  rgba(232, 160, 32, 0.35),
+    0 0 110px 50px rgba(192, 96, 16, 0.18);
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px 8px  rgba(232, 201, 122, 0.5),
+      0 0 50px 20px rgba(232, 160, 32, 0.25),
+      0 0 90px 40px rgba(192, 96, 16, 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 28px 12px rgba(232, 201, 122, 0.65),
+      0 0 65px 26px rgba(232, 160, 32, 0.35),
+      0 0 110px 48px rgba(192, 96, 16, 0.18);
+  }
+}
+
+/* ── Órbitas ──────────────────────────────────────────────────────── */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transform: translate(-50%, -50%);
+  animation: orbitSpin linear infinite;
+  pointer-events: none;
+}
+
+/* Tamaños de órbita — 6 planetas distribuidos */
+.orbit-1 { width: 18%;  height: 18%;  animation-duration: 12s; }
+.orbit-2 { width: 30%;  height: 30%;  animation-duration: 20s; }
+.orbit-3 { width: 44%;  height: 44%;  animation-duration: 30s; }
+.orbit-4 { width: 58%;  height: 58%;  animation-duration: 22s; animation-direction: reverse; }
+.orbit-5 { width: 72%;  height: 72%;  animation-duration: 36s; }
+.orbit-6 { width: 88%;  height: 88%;  animation-duration: 16s; animation-direction: reverse; }
+
+@keyframes orbitSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ── Planetas ─────────────────────────────────────────────────────── */
+.planet-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: all;
+}
+
+.planet {
+  width: clamp(22px, 4.5vw, 32px);
+  height: clamp(22px, 4.5vw, 32px);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transform: translateX(-50%);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  animation: counterSpin linear infinite;
+}
+
+/* Contador de rotación para que los planetas siempre miren al frente */
+.orbit-1 .planet { animation-duration: 12s; }
+.orbit-2 .planet { animation-duration: 20s; }
+.orbit-3 .planet { animation-duration: 30s; }
+.orbit-4 .planet { animation-duration: 22s; animation-direction: reverse; }
+.orbit-5 .planet { animation-duration: 36s; }
+.orbit-6 .planet { animation-duration: 16s; animation-direction: reverse; }
+
+@keyframes counterSpin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(-360deg); }
+}
+
+.planet:hover {
+  transform: translateX(-50%) scale(1.25);
+  z-index: 30;
+}
+
+.planet.explored::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  animation: exploredRing 2s ease-in-out infinite;
+}
+
+@keyframes exploredRing {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 0.7;  transform: scale(1.08); }
+}
+
+/* ── Colores de planetas — cada uno único ─────────────────────────── */
+
+/* Nóvaris — Introspección — Azul oscuro sumergido */
+.planet-novaris {
+  background: radial-gradient(circle at 35% 35%,
+    #4a7fc0 0%, #1a3a6e 50%, #0d1e3a 100%);
+  box-shadow: 0 0 10px rgba(74, 127, 192, 0.4);
+}
+.planet-novaris:hover {
+  box-shadow: 0 0 20px rgba(74, 127, 192, 0.7);
+}
+
+/* Selenar — Reflexión — Plateado espejo */
+.planet-selenar {
+  background: radial-gradient(circle at 35% 35%,
+    #d0d8e8 0%, #8090a8 50%, #404858 100%);
+  box-shadow: 0 0 10px rgba(192, 200, 220, 0.4);
+}
+.planet-selenar:hover {
+  box-shadow: 0 0 20px rgba(192, 200, 220, 0.7);
+}
+
+/* Krath — Caos — Ocre fragmentado */
+.planet-krath {
+  background: radial-gradient(circle at 35% 35%,
+    #d07030 0%, #8a3a10 50%, #3a1808 100%);
+  box-shadow: 0 0 10px rgba(208, 112, 48, 0.45);
+}
+.planet-krath:hover {
+  box-shadow: 0 0 20px rgba(208, 112, 48, 0.7);
+}
+
+/* Áureum — Orden — Dorado frío */
+.planet-aureum {
+  background: radial-gradient(circle at 35% 35%,
+    #f0d060 0%, #c8980a 50%, #705400 100%);
+  box-shadow: 0 0 10px rgba(240, 208, 96, 0.45);
+}
+.planet-aureum:hover {
+  box-shadow: 0 0 20px rgba(240, 208, 96, 0.7);
+}
+
+/* Sylvara — Paz — Verde profundo */
+.planet-sylvara {
+  background: radial-gradient(circle at 35% 35%,
+    #60c080 0%, #208040 50%, #0a3018 100%);
+  box-shadow: 0 0 10px rgba(96, 192, 128, 0.4);
+}
+.planet-sylvara:hover {
+  box-shadow: 0 0 20px rgba(96, 192, 128, 0.7);
+}
+
+/* Aeryn — Liberación — Azul cielo flotante */
+.planet-aeryn {
+  background: radial-gradient(circle at 35% 35%,
+    #90d8f0 0%, #3890b8 50%, #184858 100%);
+  box-shadow: 0 0 10px rgba(144, 216, 240, 0.4);
+}
+.planet-aeryn:hover {
+  box-shadow: 0 0 20px rgba(144, 216, 240, 0.7);
+}
+
+/* ── Tooltip de planeta ───────────────────────────────────────────── */
+.planet-label {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateX(50%);
+  font-family: var(--font-title);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+.planet-wrapper:hover .planet-label {
+  opacity: 1;
+}
+
+/* ── Aristas iluminadas al explorar ───────────────────────────────── */
+.orbit.lit {
+  border-color: rgba(123, 47, 190, 0.25);
+  box-shadow: 0 0 8px rgba(123, 47, 190, 0.12);
+  transition: border-color 600ms ease, box-shadow 600ms ease;
+}
+
+/* ── Contador de exploración ──────────────────────────────────────── */
+.exploration-counter {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  transition: opacity var(--transition-mid);
+  z-index: 10;
+}
+
+/* ── Contenido del modal de planeta ──────────────────────────────── */
+.planet-modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  justify-content: center;
+}
+
+.planet-modal-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.planet-modal-name {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+}
+
+.planet-story {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text-dim);
+  line-height: 1.9;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.planet-story p + p {
+  margin-top: var(--space-sm);
+}
+
+/* ── Puzzle de Orden ──────────────────────────────────────────────── */
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin: var(--space-md) 0 var(--space-sm);
+}
+
+.puzzle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-sm) var(--space-xs);
+  border: 1px solid var(--modal-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.puzzle-item:hover {
+  background: rgba(123, 47, 190, 0.08);
+  border-color: rgba(123, 47, 190, 0.4);
+  transform: translateY(-2px);
+}
+
+.puzzle-item.selected {
+  background: rgba(123, 47, 190, 0.12);
+  border-color: rgba(123, 47, 190, 0.6);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.puzzle-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.puzzle-name {
+  font-family: var(--font-title);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-dim);
+  text-align: center;
+}
+
+.puzzle-sequence {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  min-height: 36px;
+}
+
+.puzzle-seq-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.puzzle-seq-dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.seq-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  animation: seqDotIn 200ms ease forwards;
+}
+
+@keyframes seqDotIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.shake-grid {
+  animation: shakeGrid 400ms ease;
+}
+
+@keyframes shakeGrid {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-3px); }
+  80%       { transform: translateX(3px); }
+}
+
+/* ── Responsive ───────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .solar-system {
+    width: min(90vw, 90vh);
+    height: min(90vw, 90vh);
+  }
+}

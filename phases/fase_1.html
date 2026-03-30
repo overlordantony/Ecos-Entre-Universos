@@ -1,0 +1,116 @@
+<!--
+  fase_1.html
+  Ecos Entre Universos — Fase 1: Abandono de la Abadía
+  El Sistema Solar del Desapego
+-->
+
+<link rel="stylesheet" href="css/phases/fase_1.css" />
+
+<section class="fase-1">
+
+  <span class="fase-titulo">Abandono de la Abadía</span>
+
+  <!-- Sistema Solar -->
+  <div class="solar-system" id="solar-system">
+
+    <!-- Estrella Central -->
+    <div
+      class="star-central"
+      id="star-central"
+      role="button"
+      aria-label="Estrella central — toca para leer el mensaje"
+      onclick="Fase1.onStarClick(event)"
+    ></div>
+
+    <!-- Órbita 1 — Nóvaris (Introspección) -->
+    <div class="orbit orbit-1" id="orbit-novaris">
+      <div class="planet-wrapper">
+        <div
+          class="planet planet-novaris"
+          id="planet-novaris"
+          role="button"
+          aria-label="Nóvaris — Introspección"
+          onclick="Fase1.onPlanetClick('novaris')"
+        ></div>
+        <span class="planet-label">Nóvaris</span>
+      </div>
+    </div>
+
+    <!-- Órbita 2 — Aeryn (Liberación) -->
+    <div class="orbit orbit-2" id="orbit-aeryn">
+      <div class="planet-wrapper">
+        <div
+          class="planet planet-aeryn"
+          id="planet-aeryn"
+          role="button"
+          aria-label="Aeryn — Liberación"
+          onclick="Fase1.onPlanetClick('aeryn')"
+        ></div>
+        <span class="planet-label">Aeryn</span>
+      </div>
+    </div>
+
+    <!-- Órbita 3 — Sylvara (Paz) -->
+    <div class="orbit orbit-3" id="orbit-sylvara">
+      <div class="planet-wrapper">
+        <div
+          class="planet planet-sylvara"
+          id="planet-sylvara"
+          role="button"
+          aria-label="Sylvara — Paz"
+          onclick="Fase1.onPlanetClick('sylvara')"
+        ></div>
+        <span class="planet-label">Sylvara</span>
+      </div>
+    </div>
+
+    <!-- Órbita 4 — Krath (Caos) -->
+    <div class="orbit orbit-4" id="orbit-krath">
+      <div class="planet-wrapper">
+        <div
+          class="planet planet-krath"
+          id="planet-krath"
+          role="button"
+          aria-label="Krath — Caos"
+          onclick="Fase1.onPlanetClick('krath')"
+        ></div>
+        <span class="planet-label">Krath</span>
+      </div>
+    </div>
+
+    <!-- Órbita 5 — Áureum (Orden) -->
+    <div class="orbit orbit-5" id="orbit-aureum">
+      <div class="planet-wrapper">
+        <div
+          class="planet planet-aureum"
+          id="planet-aureum"
+          role="button"
+          aria-label="Áureum — Orden"
+          onclick="Fase1.onPlanetClick('aureum')"
+        ></div>
+        <span class="planet-label">Áureum</span>
+      </div>
+    </div>
+
+    <!-- Órbita 6 — Selenar (Reflexión) -->
+    <div class="orbit orbit-6" id="orbit-selenar">
+      <div class="planet-wrapper">
+        <div
+          class="planet planet-selenar"
+          id="planet-selenar"
+          role="button"
+          aria-label="Selenar — Reflexión"
+          onclick="Fase1.onPlanetClick('selenar')"
+        ></div>
+        <span class="planet-label">Selenar</span>
+      </div>
+    </div>
+
+  </div><!-- /solar-system -->
+
+  <!-- Contador de exploración -->
+  <p class="exploration-counter" id="exploration-counter">
+    0 / 6 mundos explorados
+  </p>
+
+</section>
