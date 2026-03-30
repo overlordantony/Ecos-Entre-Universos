@@ -772,8 +772,8 @@ repetir mientras x < 5:
     if (isValid) {
       input.classList.add('success');
       setTimeout(() => {
-        Engine.closeModal();
-        _showOrderPuzzle();
+      Engine.closeModal();
+      setTimeout(() => Engine.showCheckpointScreen('fase_2', () => Engine.navigateTo('fase_3')), 300);
       }, 500);
     } else {
       input.classList.remove('error');
