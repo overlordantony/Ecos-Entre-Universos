@@ -185,7 +185,7 @@ const Fase1 = (() => {
       <div class="planet-modal-header">
         <div class="planet-modal-dot" style="background:${planet.color}"></div>
         <span class="planet-modal-name">${planet.name} — ${planet.tema}</span>
-        /* <img src="${planet.imagen}" alt="${planet.name}" class="planet-modal-image" /> */
+        
       </div>
       <div class="planet-story modal-reveal">${planet.story}</div>
     `;
@@ -399,3 +399,4 @@ const Fase1 = (() => {
   };
 
 })();
+//<img src="${planet.imagen}" alt="${planet.name}" class="planet-modal-image" />
