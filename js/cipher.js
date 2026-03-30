@@ -6,7 +6,7 @@
  *   desplazamiento > 0 → shift derecha
  *   desplazamiento < 0 → shift izquierda
  *
- * Ejemplo: cc("Naoiy", -6) === "hueco"
+ * Ejemplo: cc("Nakiu", -6) === "hueco"
  */
 
 const Cipher = (() => {
